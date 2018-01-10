@@ -7,7 +7,7 @@ notifications:
   slack:
     secure: d+NSaR+cfRkcJfX/uEVwdyQDlayZO6c8QV96grl1stmWxG3XOXvXg1tM6v7EBeb9VRw5T4VglnnJGNJA62j1ReEJ0XyWr5XtaNWiF6Lc4UOty/TTG36IQdkWS1vQA8v2Hre73YbvOhtBb6biNneVAk+rrfRSgomEa+ec22cjgUo=
 env:
-  - RSMTVERSION="5.7"
+  - RSMVERSION="5.7"
 
 # run on the new Travis infrastructure
 sudo: false
@@ -20,7 +20,7 @@ before_install:
   - export PATH=/home/travis/miniconda3/bin:$PATH
 install:
   - git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
-  - conda create --name rsmenv -c defaults -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMTVERSION}
+  - conda create --name rsmenv -c defaults -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
