@@ -1,4 +1,4 @@
-language: python
+language: generic
 os:
   - linux
   - osx
@@ -19,10 +19,10 @@ before_install:
   - ./miniconda.sh -b
   - export PATH=/home/travis/miniconda3/bin:$PATH
 install:
-  - git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
+  - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/travis/rsmcode
   - conda create --name rsmenv -c defaults -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
-  - conda activate rsmenv
-  - nosetests -v ${HOME}/rsmcode/tests
+  - source activate rsmenv
+  - nosetests -v ${HOME}/travis/rsmcode/tests
