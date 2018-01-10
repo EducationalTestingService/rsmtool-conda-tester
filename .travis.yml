@@ -1,0 +1,28 @@
+language: python
+os:
+  - linux
+  - osx
+notifications:
+  email: false
+  slack:
+    secure: d+NSaR+cfRkcJfX/uEVwdyQDlayZO6c8QV96grl1stmWxG3XOXvXg1tM6v7EBeb9VRw5T4VglnnJGNJA62j1ReEJ0XyWr5XtaNWiF6Lc4UOty/TTG36IQdkWS1vQA8v2Hre73YbvOhtBb6biNneVAk+rrfRSgomEa+ec22cjgUo=
+env:
+  - RSMVERSION="5.7"
+
+# run on the new Travis infrastructure
+sudo: false
+
+# Install the rsmtool package
+before_install:
+  - if [ ${TRAVIS_OS_NAME} == "linux" ]; then wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; else wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh; fi
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda3/bin:$PATH
+install:
+  - git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
+  - conda create --name rsmenv -c defaults -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION}
+
+# Run tests using the installed rsmtool package
+script:
+  - conda activate rsmenv
+  - nosetests -v ${HOME}/rsmcode/tests
