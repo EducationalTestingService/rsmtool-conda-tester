@@ -2,7 +2,8 @@ build: false
 
 environment:
   matrix:
-    - PYTHON_VERSION: 3.6
+    - platform: x64
+      PYTHON_VERSION: 3.6
       MINICONDA: C:\Miniconda3
       RSMVERSION: 5.7
 
