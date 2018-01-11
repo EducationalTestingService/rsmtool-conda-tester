@@ -19,7 +19,7 @@ platform:
   - x64
 
 install:
-  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "set PATH=C:\\Miniconda-x64;C:\\Miniconda-x64\\Scripts;C:\\Miniconda-x64\\Library\\bin;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
