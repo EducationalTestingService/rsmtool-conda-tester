@@ -1,0 +1,22 @@
+build: false
+
+environment:
+  matrix:
+    - PYTHON_VERSION: 3.6
+      MINICONDA: C:\Miniconda3
+      RSMVERSION: 5.7
+
+init:
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+
+install:
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - "conda create -y -n rsmenv -c defaults -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%"
+  - git clone https://github.com/EducationalTestingService/rsmtool.git c:\rsmcode
+
+test_script:
+  - activate rsmenv
+  - nosetests -v c:\rsmcode\tests
