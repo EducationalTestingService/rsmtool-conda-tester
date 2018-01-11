@@ -4,9 +4,11 @@ environment:
   RSMVERSION: 5.7
 
 matrix:
-  - platform: x64
-    PYTHON_VERSION: 3.6
+  - PYTHON_VERSION: 3.6
     MINICONDA: C:\Miniconda3
+
+platform:
+  - x64
 
 init:
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
