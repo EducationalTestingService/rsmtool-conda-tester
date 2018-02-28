@@ -28,4 +28,5 @@ install:
 
 test_script:
   - activate rsmenv
-  - nosetests -v c:\rsmcode\tests
+  - "set TESTDIR=C:\\rsmcode\\tests"
+  - nosetests --nologcapture c:\rsmcode\tests
