@@ -13,7 +13,7 @@ environment:
   matrix:
     - TARGET_ARCH: "x64"
       CONDA_PY: "36"
-      RSMVERSION: 5.7
+      RSMVERSION: 6.0
 
 platform:
   - x64
