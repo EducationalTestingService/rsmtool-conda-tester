@@ -24,4 +24,4 @@ install:
 # Run tests using the installed rsmtool package
 script:
   - source activate rsmenv
-  - nosetests -v ${HOME}/travis/rsmcode/tests
+  - TESTDIR=${HOME}/travis/rsmcode/tests nosetests --nologcapture ${HOME}/travis/rsmcode/tests
