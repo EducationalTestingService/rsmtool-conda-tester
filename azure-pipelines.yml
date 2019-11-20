@@ -6,6 +6,7 @@
 variables:
   MPLBACKEND: Agg
   RSMVERSION: 7.0.0
+  TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
 
 trigger: none
 pr:
@@ -37,6 +38,6 @@ jobs:
 
   - script: |
       CALL activate rsmdev
-      echo $(Build.SourcesDirectory)
+      echo $(TESTDIR)
       nosetests $(Build.SourcesDirectory)\rsmcode\tests
     displayName: 'Run tests'
