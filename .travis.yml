@@ -19,7 +19,7 @@ before_install:
   - export PATH=/home/travis/miniconda3/bin:$PATH
 install:
   - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/travis/rsmcode
-  - conda create --override-channels --name rsmenv -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION} --yes
+  - conda create --name rsmenv -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:

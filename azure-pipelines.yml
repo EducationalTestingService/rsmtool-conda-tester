@@ -23,19 +23,23 @@ jobs:
     displayName: Add conda to PATH
 
   - script: |
+      git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
+    displayName: "Clone RSMTool repository"
+
+  - script: |
       conda update --quiet --yes conda
       conda info -a
     displayName: "Update conda"
 
   - script: |
-      conda create --override-channels --name rsmdev --yes --quiet -c conda-forge -c defaults -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda create --name rsmdev --yes --quiet -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
       conda init cmd.exe
       CALL activate rsmdev
     displayName: 'Install RSMTool Package & Dependencies'
 
   - script: |
       CALL activate rsmdev
-      nosetests --with-xunit tests/
+      nosetests --with-xunit rsmcode\tests
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
