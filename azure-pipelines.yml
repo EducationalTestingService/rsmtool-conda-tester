@@ -1,0 +1,46 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+variables:
+  MPLBACKEND: Agg
+  RSMVERSION: 7.0.0
+
+trigger:
+  branches:
+    include:
+    - '*'  # must quote since "*" is a YAML reserved character; we want a string
+
+jobs:
+
+- job: 'RSMToolTests'
+  pool:
+    vmImage: 'windows-latest'
+
+  steps:
+  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to PATH
+
+  - script: |
+      conda update --quiet --yes conda
+      conda info -a
+    displayName: "Update conda"
+
+  - script: |
+      conda create --override-channels --name rsmdev --yes --quiet -c conda-forge -c defaults -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda init cmd.exe
+      CALL activate rsmdev
+    displayName: 'Install RSMTool Package & Dependencies'
+
+  - script: |
+      CALL activate rsmdev
+      nosetests --with-xunit tests/
+    displayName: 'Run tests'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFiles: 'nosetests.xml'
+      testRunTitle: 'RSMTool tests'
+    condition: succeededOrFailed()
