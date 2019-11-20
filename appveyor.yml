@@ -13,7 +13,7 @@ environment:
   matrix:
     - TARGET_ARCH: "x64"
       CONDA_PY: "36"
-      RSMVERSION: 6.1.0
+      RSMVERSION: 7.0.0
 
 platform:
   - x64
@@ -23,7 +23,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - "conda create -y -n rsmenv -c defaults -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%"
+  - "conda create -y -n rsmenv -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%"
   - git clone https://github.com/EducationalTestingService/rsmtool.git c:\rsmcode
 
 test_script:
