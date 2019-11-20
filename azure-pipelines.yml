@@ -7,10 +7,9 @@ variables:
   MPLBACKEND: Agg
   RSMVERSION: 7.0.0
 
-trigger:
-  branches:
-    include:
-    - '*'  # must quote since "*" is a YAML reserved character; we want a string
+trigger: none
+pr:
+- master
 
 jobs:
 
@@ -34,17 +33,9 @@ jobs:
   - script: |
       conda create --name rsmdev --yes --quiet -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
       conda init cmd.exe
-      CALL activate rsmdev
     displayName: 'Install RSMTool Package & Dependencies'
 
   - script: |
-      CALL activate rsmdev
-      nosetests --with-xunit rsmcode\tests
+      CALL conda activate rsmdev
+      nosetests $(Build.SourcesDirectory)\rsmcode\tests
     displayName: 'Run tests'
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testResultsFiles: 'nosetests.xml'
-      testRunTitle: 'RSMTool tests'
-    condition: succeededOrFailed()
