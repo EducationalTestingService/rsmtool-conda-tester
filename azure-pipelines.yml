@@ -32,10 +32,10 @@ jobs:
 
   - script: |
       conda create --name rsmdev --yes --quiet -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
-      conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
   - script: |
-      CALL conda activate rsmdev
+      conda init cmd.exe
+      CALL conda.bat activate rsmdev
       nosetests $(Build.SourcesDirectory)\rsmcode\tests
     displayName: 'Run tests'
