@@ -9,7 +9,7 @@
     The distribution is basically identical to the way we do it in .travis.yaml
 #>
 
-$tests = Get-ChildItem .\tests\ -Filter "test*.py" # search for test files with specific pattern.
+$tests = Get-ChildItem rsmcode\tests\ -Filter "test*.py" # search for test files with specific pattern.
 $totalAgents = [int]$Env:SYSTEM_TOTALJOBSINPHASE # standard VSTS variables available using parallel execution; total number of parallel jobs running
 $agentNumber = [int]$Env:SYSTEM_JOBPOSITIONINPHASE  # current job position
 $testCount = $tests.Count
