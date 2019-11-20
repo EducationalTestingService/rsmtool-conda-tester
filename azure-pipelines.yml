@@ -36,7 +36,7 @@ jobs:
     displayName: 'Install RSMTool Package & Dependencies'
 
   - script: |
-      conda init cmd.exe
-      conda activate rsmdev
+      CALL activate rsmdev
+      echo $(Build.SourcesDirectory)
       nosetests $(Build.SourcesDirectory)\rsmcode\tests
     displayName: 'Run tests'
