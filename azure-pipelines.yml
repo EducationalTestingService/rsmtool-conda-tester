@@ -5,7 +5,7 @@
 
 variables:
   MPLBACKEND: Agg
-  RSMVERSION: 7.0.0
+  RSMVERSION: 7.1.0
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
 
 trigger: none
@@ -34,7 +34,7 @@ jobs:
     displayName: "Update conda"
 
   - script: |
-      conda create --name rsmdev --yes --quiet -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda create --name rsmdev --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
       conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 

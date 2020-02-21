@@ -7,7 +7,7 @@ notifications:
     secure: '09oaAq76MSY6AN0Zh34PMYfo3K0+9LPUC5sw2UUx6f+CI6aFdKXr933n5aiwek4xm7mtSkTAxThIQsnQ5og0GuD+IYiL/6w1eth6ZuLfQ0/DLw7BOVy+UDN89Zq3K4BF6njYhM6F3YeDcbTUwM+t//kych/+MCGCfKHHOYn88cQ5sDRvpt473vgx+YwyYVULfFAhlvJdiuxu7YMUKLdOD/NpiiRgIoIUvtLy0DaBHHr/il0rRYSN1GF7qGEAB/S+RWTZU4uWtX6BEPhoDZLjgEy9DzK6VpJnNe1TxN3U0VNEmoA1JIPGDZE+aPawymvbynBlsVGZBsFiCDD1TqunLYOhZ3u5Kq/hHGCvRVYFUM5v/a+sN19Xqvwps5Jz7ySWuyfPtbCT6UWem6jyyqL1t7tuUa/Z4GaQS3naNJk3bAVsjhBct0cKIRPhXp01d0iqjAdC9h1fzEEmpvm7YmzvNhXqmjywAWcbgIEVH3ZhHMgO49ftlXiiwK57RSd7WSdRei+0ZIAw1xpFQyoQ4MZC6ZtA8OEw6gVRa1nIJkZZIqJnamue3HHbc//WgyURP/GEVzlOuSKGxDcF8R/D7exdFAIpa1viIyPBSNovP5mdRWTVREZiaBSXRXpn25S9LX9lv5oOr0L+q6WKOvwp1kQjK2HEy+3Tb+LEdrIhfOG+Md0='
 env:
   global:
-  - RSMVERSION="7.0.0"
+  - RSMVERSION="7.1.0"
   matrix:
   - TESTFILES="${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_1.py"
   - TESTFILES="${HOME}/travis/rsmcode/tests/test_comparer.py ${HOME}/travis/rsmcode/tests/test_configuration_parser.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_2.py"
@@ -26,7 +26,7 @@ before_install:
   - export PATH=/home/travis/miniconda3/bin:$PATH
 install:
   - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/travis/rsmcode
-  - conda create --name rsmenv -c conda-forge -c desilinguist python=3.6 rsmtool=${RSMVERSION} --yes
+  - conda create --name rsmenv -c conda-forge -c ets python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
