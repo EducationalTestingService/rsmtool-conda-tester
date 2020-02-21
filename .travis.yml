@@ -30,4 +30,5 @@ install:
 
 # Run tests using the installed rsmtool package
 script:
-  - TESTDIR=${HOME}/rsmcode/tests ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture ${TESTFILES}
+  - 
+  - cd ${HOME}/rsmcode/tests && ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture ${TESTFILES}

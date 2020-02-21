@@ -6,7 +6,7 @@
 variables:
   MPLBACKEND: Agg
   RSMVERSION: 7.1.0
-  TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
+  TESTDIR: 
 
 trigger: none
 pr:
@@ -42,8 +42,9 @@ jobs:
     displayName: 'PowerShell Script to distribute tests'
 
   - script: |
-      CALL activate rsmdev
       echo $(pytestfiles)
+      CALL activate rsmdev
+      chdir $(Build.SourcesDirectory)\rsmcode\tests
       nosetests --with-xunit $(pytestfiles)
     displayName: 'Run tests'
 
