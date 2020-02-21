@@ -9,11 +9,11 @@ env:
   global:
   - RSMVERSION="7.1.0"
   matrix:
-  - TESTFILES="${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_1.py"
-  - TESTFILES="${HOME}/travis/rsmcode/tests/test_comparer.py ${HOME}/travis/rsmcode/tests/test_configuration_parser.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_2.py"
-  - TESTFILES="${HOME}/travis/rsmcode/tests/test_analyzer.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmeval.py ${HOME}/travis/rsmcode/tests/test_fairness_utils.py ${HOME}/travis/rsmcode/tests/test_prmse_utils.py ${HOME}/travis/rsmcode/tests/test_container.py"
-  - TESTFILES="${HOME}/travis/rsmcode/tests/test_experiment_rsmcompare.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmsummarize.py ${HOME}/travis/rsmcode/tests/test_modeler.py ${HOME}/travis/rsmcode/tests/test_preprocessor.py ${HOME}/travis/rsmcode/tests/test_writer.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_3.py"
-  - TESTFILES="${HOME}/travis/rsmcode/tests/test_experiment_rsmpredict.py ${HOME}/travis/rsmcode/tests/test_reader.py ${HOME}/travis/rsmcode/tests/test_reporter.py ${HOME}/travis/rsmcode/tests/test_transformer.py ${HOME}/travis/rsmcode/tests/test_utils.py ${HOME}/travis/rsmcode/tests/test_experiment_rsmtool_4.py"
+  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmtool_1.py"
+  - TESTFILES="${HOME}/rsmcode/tests/test_comparer.py ${HOME}/rsmcode/tests/test_configuration_parser.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_2.py"
+  - TESTFILES="${HOME}/rsmcode/tests/test_analyzer.py ${HOME}/rsmcode/tests/test_experiment_rsmeval.py ${HOME}/rsmcode/tests/test_fairness_utils.py ${HOME}/rsmcode/tests/test_prmse_utils.py ${HOME}/rsmcode/tests/test_container.py"
+  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmcompare.py ${HOME}/rsmcode/tests/test_experiment_rsmsummarize.py ${HOME}/rsmcode/tests/test_modeler.py ${HOME}/rsmcode/tests/test_preprocessor.py ${HOME}/rsmcode/tests/test_writer.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_3.py"
+  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmpredict.py ${HOME}/rsmcode/tests/test_reader.py ${HOME}/rsmcode/tests/test_reporter.py ${HOME}/rsmcode/tests/test_transformer.py ${HOME}/rsmcode/tests/test_utils.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_4.py"
 
 # run on the new Travis infrastructure
 sudo: false
@@ -23,12 +23,12 @@ before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
   - ./miniconda.sh -b
-  - export PATH=/home/travis/miniconda3/bin:$PATH
+  - export PATH="${HOME}/miniconda3/bin:$PATH"
 install:
-  - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/travis/rsmcode
+  - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/rsmcode
   - conda create --name rsmenv -c conda-forge -c ets python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
   - source activate rsmenv
-  - TESTDIR=${HOME}/travis/rsmcode/tests nosetests --nologcapture ${TESTFILES}
+  - TESTDIR=${HOME}/rsmcode/tests nosetests --nologcapture ${TESTFILES}
