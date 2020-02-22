@@ -8,6 +8,7 @@ notifications:
 env:
   global:
   - RSMVERSION="7.1.0"
+  - TESTDIR="${HOME}/rsmcode/tests"
   matrix:
   - TESTFILES="test_experiment_rsmtool_1.py"
   - TESTFILES="test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
@@ -26,8 +27,10 @@ before_install:
   - export PATH="${HOME}/miniconda3/bin:$PATH"
 install:
   - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/rsmcode
+  - cd ${HOME}/rsmcode
+  - git checkout make-copy-data-files-package-friendly
   - conda create --name rsmenv -c conda-forge -c ets python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
-  - cd ${HOME}/rsmcode && TESTDIR=${HOME}/rsmcode/tests ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture -w ${HOME}/rsmcode/tests ${TESTFILES}
+  - ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture -w ${TESTDIR} ${TESTFILES}

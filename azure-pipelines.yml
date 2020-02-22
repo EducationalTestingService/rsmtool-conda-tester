@@ -27,6 +27,8 @@ jobs:
 
   - script: |
       git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
+      cd rsmcode
+      git checkout make-copy-data-files-package-friendly
     displayName: "Clone RSMTool repository"
 
   - script: |
@@ -43,7 +45,8 @@ jobs:
 
   - script: |
       echo $(pytestfiles)
-      chdir $(Build.SourcesDirectory)\rsmcode && nosetests --with-xunit -w $(Build.SourcesDirectory)\rsmcode\tests $(pytestfiles)
+      CALL activate rsmenv
+      nosetests --with-xunit -w %TESTDIR% $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
