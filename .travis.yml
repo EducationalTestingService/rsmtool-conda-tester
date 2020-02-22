@@ -9,11 +9,11 @@ env:
   global:
   - RSMVERSION="7.1.0"
   matrix:
-  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmtool_1.py"
-  - TESTFILES="${HOME}/rsmcode/tests/test_comparer.py ${HOME}/rsmcode/tests/test_configuration_parser.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_2.py"
-  - TESTFILES="${HOME}/rsmcode/tests/test_analyzer.py ${HOME}/rsmcode/tests/test_experiment_rsmeval.py ${HOME}/rsmcode/tests/test_fairness_utils.py ${HOME}/rsmcode/tests/test_prmse_utils.py ${HOME}/rsmcode/tests/test_container.py"
-  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmcompare.py ${HOME}/rsmcode/tests/test_experiment_rsmsummarize.py ${HOME}/rsmcode/tests/test_modeler.py ${HOME}/rsmcode/tests/test_preprocessor.py ${HOME}/rsmcode/tests/test_writer.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_3.py"
-  - TESTFILES="${HOME}/rsmcode/tests/test_experiment_rsmpredict.py ${HOME}/rsmcode/tests/test_reader.py ${HOME}/rsmcode/tests/test_reporter.py ${HOME}/rsmcode/tests/test_transformer.py ${HOME}/rsmcode/tests/test_utils.py ${HOME}/rsmcode/tests/test_experiment_rsmtool_4.py"
+  - TESTFILES="test_experiment_rsmtool_1.py"
+  - TESTFILES="test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
+  - TESTFILES="test_analyzer.py test_experiment_rsmeval.py test_fairness_utils.py test_prmse_utils.py test_container.py"
+  - TESTFILES="test_experiment_rsmcompare.py test_experiment_rsmsummarize.py test_modeler.py test_preprocessor.py test_writer.py test_experiment_rsmtool_3.py"
+  - TESTFILES="test_experiment_rsmpredict.py test_reader.py test_reporter.py test_transformer.py test_utils.py test_experiment_rsmtool_4.py"
 
 # run on the new Travis infrastructure
 sudo: false
@@ -30,5 +30,4 @@ install:
 
 # Run tests using the installed rsmtool package
 script:
-  - 
-  - cd ${HOME}/rsmcode/tests && ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture ${TESTFILES}
+  - cd ${HOME}/rsmcode && ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture ${TESTFILES}

@@ -44,7 +44,7 @@ jobs:
   - script: |
       echo $(pytestfiles)
       CALL activate rsmdev
-      chdir $(Build.SourcesDirectory)\rsmcode\tests
+      chdir $(Build.SourcesDirectory)\rsmcode
       nosetests --with-xunit $(pytestfiles)
     displayName: 'Run tests'
 
