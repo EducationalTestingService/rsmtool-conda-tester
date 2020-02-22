@@ -24,12 +24,12 @@ before_install:
   - chmod +x miniconda.sh
   - ./miniconda.sh -b
   - export PATH="${HOME}/miniconda3/bin:$PATH"
-  - conda init bash
 install:
   - git clone https://github.com/EducationalTestingService/rsmtool.git ${HOME}/rsmcode
   - conda create --name rsmenv -c conda-forge -c ets python=3.6 rsmtool=${RSMVERSION} --yes
 
 # Run tests using the installed rsmtool package
 script:
+  - conda init bash
   - conda activate rsmenv
   - TESTDIR="${HOME}/rsmcode/tests" nosetests --nologcapture ${TESTFILES}
