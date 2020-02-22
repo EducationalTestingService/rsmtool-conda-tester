@@ -37,7 +37,7 @@ jobs:
     displayName: "Update conda"
 
   - script: |
-      conda create --name rsmdev --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
     displayName: 'Install RSMTool Package & Dependencies'
 
   - powershell: ./DistributeTests.ps1 
