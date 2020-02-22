@@ -6,7 +6,7 @@
 variables:
   MPLBACKEND: Agg
   RSMVERSION: 7.1.0
-  TESTDIR: 
+  TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
 
 trigger: none
 pr:
