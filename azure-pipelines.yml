@@ -5,6 +5,7 @@
 
 variables:
   MPLBACKEND: Agg
+  PYTHON_VERSION: 3.6
   RSMVERSION: 7.1.0
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
 
@@ -35,7 +36,6 @@ jobs:
 
   - script: |
       conda create --name rsmdev --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
-      conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
   - powershell: ./DistributeTests.ps1 
@@ -43,9 +43,7 @@ jobs:
 
   - script: |
       echo $(pytestfiles)
-      CALL activate rsmdev
-      chdir $(Build.SourcesDirectory)\rsmcode
-      nosetests --with-xunit $(pytestfiles)
+      chdir $(Build.SourcesDirectory)\rsmcode && nosetests --with-xunit -w $(Build.SourcesDirectory)\rsmcode\tests $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2

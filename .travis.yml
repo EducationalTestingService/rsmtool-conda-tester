@@ -30,6 +30,4 @@ install:
 
 # Run tests using the installed rsmtool package
 script:
-  - conda init bash
-  - conda activate rsmenv
-  - TESTDIR="${HOME}/rsmcode/tests" nosetests --nologcapture ${TESTFILES}
+  - cd ${HOME}/rsmcode && TESTDIR=${HOME}/rsmcode/tests ${HOME}/miniconda3/envs/rsmenv/bin/nosetests --nologcapture -w ${HOME}/rsmcode/tests ${TESTFILES}
