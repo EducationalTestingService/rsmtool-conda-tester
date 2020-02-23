@@ -38,6 +38,7 @@ jobs:
 
   - script: |
       conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
   - powershell: ./DistributeTests.ps1 
