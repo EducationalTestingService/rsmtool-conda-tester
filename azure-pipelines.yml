@@ -5,7 +5,8 @@
 
 variables:
   MPLBACKEND: Agg
-  RSMVERSION: 7.0.0
+  PYTHON_VERSION: 3.6
+  RSMVERSION: 7.1.0
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
 
 trigger: none
@@ -25,8 +26,14 @@ jobs:
     displayName: Add conda to PATH
 
   - script: |
-      git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
-    displayName: "Clone RSMTool repository"
+      mkdir rsmcode
+      cd rsmcode
+      git init
+      git remote add -f origin https://github.com/EducationalTestingService/rsmtool.git
+      git config core.sparsecheckout true
+      echo tests/* > .git/info/sparse-checkout
+      git pull --depth=1 origin master
+    displayName: "Clone RSMTool tests"
 
   - script: |
       conda update --quiet --yes conda
@@ -34,7 +41,7 @@ jobs:
     displayName: "Update conda"
 
   - script: |
-      conda create --name rsmdev --yes --quiet -c conda-forge -c desilinguist python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
       conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
@@ -42,9 +49,9 @@ jobs:
     displayName: 'PowerShell Script to distribute tests'
 
   - script: |
-      CALL activate rsmdev
       echo $(pytestfiles)
-      nosetests --with-xunit $(pytestfiles)
+      CALL activate rsmenv
+      nosetests --with-xunit -w %TESTDIR% $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
