@@ -26,10 +26,14 @@ jobs:
     displayName: Add conda to PATH
 
   - script: |
-      git clone https://github.com/EducationalTestingService/rsmtool.git rsmcode
+      mkdir rsmcode
       cd rsmcode
-      git checkout make-copy-data-files-package-friendly
-    displayName: "Clone RSMTool repository"
+      git init
+      git remote add -f origin https://github.com/EducationalTestingService/rsmtool.git
+      git config core.sparsecheckout true
+      echo tests/* > .git/info/sparse-checkout
+      git pull --depth=1 origin master
+    displayName: "Clone RSMTool tests"
 
   - script: |
       conda update --quiet --yes conda
