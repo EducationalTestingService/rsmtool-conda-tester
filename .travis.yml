@@ -9,6 +9,8 @@ env:
   global:
   - RSMVERSION="8.0.0"
   - TESTDIR="${HOME}/rsmcode/tests"
+  - BINPATH=${HOME}/miniconda3/envs/rsmenv/bin
+
   matrix:
   - TESTFILES="test_experiment_rsmtool_1.py"
   - TESTFILES="test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
