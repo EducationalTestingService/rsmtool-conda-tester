@@ -41,8 +41,9 @@ elseif ($agentNumber -eq 3) {
     $testsToRun = $testsToRun + "test_analyzer.py"
     $testsToRun = $testsToRun + "test_experiment_rsmeval.py"
     $testsToRun = $testsToRun + "test_fairness_utils.py"
-    $testsToRun = $testsToRun + "test_prmse_utils.py"
+    $testsToRun = $testsToRun + "test_utils_prmse.py"
     $testsToRun = $testsToRun + "test_test_utils.py"
+    $testsToRun = $testsToRun + "test_cli.py"
 }
 elseif ($agentNumber -eq 4) {
     $testsToRun = $testsToRun + "test_experiment_rsmcompare.py"

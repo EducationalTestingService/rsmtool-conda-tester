@@ -12,7 +12,7 @@ env:
   matrix:
   - TESTFILES="test_experiment_rsmtool_1.py"
   - TESTFILES="test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
-  - TESTFILES="test_analyzer.py test_experiment_rsmeval.py test_fairness_utils.py test_prmse_utils.py test_container.py test_test_utils.py"
+  - TESTFILES="test_analyzer.py test_experiment_rsmeval.py test_fairness_utils.py test_utils_prmse.py test_container.py test_test_utils.py test_cli.py"
   - TESTFILES="test_experiment_rsmcompare.py test_experiment_rsmsummarize.py test_modeler.py test_preprocessor.py test_writer.py test_experiment_rsmtool_3.py"
   - TESTFILES="test_experiment_rsmpredict.py test_reader.py test_reporter.py test_transformer.py test_utils.py test_experiment_rsmtool_4.py"
 
