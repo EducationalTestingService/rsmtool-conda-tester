@@ -6,7 +6,7 @@
 variables:
   MPLBACKEND: Agg
   PYTHON_VERSION: 3.8
-  RSMVERSION: 8.0.2
+  RSMVERSION: 8.1.0
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
   BINPATH: C:\Miniconda\envs\rsmenv\Scripts
 
@@ -42,7 +42,7 @@ jobs:
     displayName: "Update conda"
 
   - script: |
-      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION%
+      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION% nose parameterized
       conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
