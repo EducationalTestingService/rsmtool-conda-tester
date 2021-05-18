@@ -1,0 +1,62 @@
+image: continuumio/miniconda3:latest
+
+stages:
+  - test
+
+variables:
+  PYVERSION: "3.7"
+  RSMVERSION: "8.1.0"
+  BINPATH: "/root/rsmenv/bin"
+  TESTDIR: "/root/rsmcode/tests"
+  
+# set up the basic job to run only for pull requests
+.runtests:
+  only:
+    - external_pull_requests
+  before_script:
+    - mkdir /root/rsmcode
+    - cd /root/rsmcode
+    - git init
+    - git remote add -f origin https://github.com/EducationalTestingService/rsmtool.git
+    - git config core.sparsecheckout true
+    - echo "tests/*" > .git/info/sparse-checkout
+    - git pull --depth=1 origin main
+    - conda create --prefix /root/rsmenv -c conda-forge -c ets python=3.7 rsmtool=${RSMVERSION} nose parameterized --yes
+
+  script:
+    - "/root/rsmenv/bin/nosetests --nologcapture -w ${TESTDIR} ${TESTFILES}"
+
+# first set of test files
+testset1:
+  extends: ".runtests"
+  variables:
+    TESTFILES: "test_experiment_rsmtool_1.py"
+  stage: "test"
+
+# second set of test files
+testset2:
+  extends: ".runtests"
+  variables:
+    TESTFILES: "test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
+  stage: "test"
+
+# third set of test files
+testset3:
+  extends: ".runtests"
+  variables:
+    TESTFILES: "test_analyzer.py test_experiment_rsmeval.py test_fairness_utils.py test_utils_prmse.py test_container.py test_test_utils.py test_cli.py"
+  stage: "test"
+
+# fourth set of test files
+testset4:
+  extends: ".runtests"
+  variables:
+    TESTFILES: "test_experiment_rsmcompare.py test_experiment_rsmsummarize.py test_modeler.py test_preprocessor.py test_writer.py test_experiment_rsmtool_3.py"
+  stage: "test"
+
+# fifth set of test files
+testset5:
+  extends: ".runtests"
+  variables:
+    TESTFILES: "test_experiment_rsmpredict.py test_reader.py test_reporter.py test_transformer.py test_utils.py test_experiment_rsmtool_4.py"
+  stage: "test"
