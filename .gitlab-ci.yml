@@ -21,7 +21,7 @@ variables:
     - git config core.sparsecheckout true
     - echo "tests/*" > .git/info/sparse-checkout
     - git pull --depth=1 origin main
-    - conda create --name rsmenv -c conda-forge -c ets python=3.7 rsmtool=${RSMVERSION} nose parameterized --yes
+    - conda create --prefix /root/rsmenv -c conda-forge -c ets python=3.7 rsmtool=${RSMVERSION} nose parameterized --yes
 
   script:
     - "/root/rsmenv/bin/nosetests --nologcapture -w ${TESTDIR} ${TESTFILES}"
