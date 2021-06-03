@@ -6,7 +6,7 @@
 variables:
   MPLBACKEND: Agg
   PYTHON_VERSION: 3.8
-  RSMVERSION: 8.1.0
+  RSMVERSION: 8.1.1
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
   BINPATH: C:\Miniconda\envs\rsmenv\Scripts
 
