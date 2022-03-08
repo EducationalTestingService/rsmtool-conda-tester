@@ -5,8 +5,8 @@
 
 variables:
   MPLBACKEND: Agg
-  PYTHON_VERSION: 3.8
-  RSMVERSION: 8.1.2
+  PYTHON_VERSION: 3.10
+  RSMVERSION: 9.0.0
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
   BINPATH: C:\Miniconda\envs\rsmenv\Scripts
 
@@ -20,7 +20,7 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   strategy:
-    parallel: 5
+    parallel: 6
 
   steps:
   - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
@@ -46,7 +46,7 @@ jobs:
       conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
-  - powershell: ./DistributeTests.ps1 
+  - powershell: ./DistributeTests.ps1
     displayName: 'PowerShell Script to distribute tests'
 
   - script: |
