@@ -24,7 +24,7 @@ variables:
     - conda create --prefix /root/rsmenv -c conda-forge -c ets python=${PYVERSION} rsmtool=${RSMVERSION} nose parameterized --yes
 
   script:
-    - "/root/rsmenv/bin/nosetests --nologcapture -w ${TESTDIR} ${TESTFILES}"
+    - "/root/rsmenv/bin/nose2 --quiet -s tests ${TESTFILES}"
 
 # first set of test files
 testset1:

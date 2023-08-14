@@ -52,12 +52,12 @@ jobs:
   - script: |
       echo $(pytestfiles)
       CALL activate rsmenv
-      nosetests --with-xunit -w %TESTDIR% $(pytestfiles)
+      nose2 --quiet -s tests $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
     inputs:
-      testResultsFiles: 'nosetests.xml'
+      testResultsFiles: 'junit.xml'
       testRunTitle: 'RSMTool tests'
     condition: succeededOrFailed()
