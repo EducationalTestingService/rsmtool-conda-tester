@@ -52,7 +52,7 @@ jobs:
   - script: |
       echo $(pytestfiles)
       CALL activate rsmenv
-      nose2 --quiet -s tests $(pytestfiles)
+      nose2 --quiet -s %TESTDIR% $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
