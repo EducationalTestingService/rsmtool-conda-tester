@@ -1,11 +1,11 @@
-image: continuumio/miniconda3:latest
+image: condaforge/mambaforge:latest
 
 stages:
   - test
 
 variables:
   PYVERSION: "3.8"
-  RSMVERSION: "10.0.0"
+  RSMVERSION: "11.0.1"
   BINPATH: "/root/rsmenv/bin"
   TESTDIR: "/root/rsmcode/tests"
 
@@ -21,49 +21,49 @@ variables:
     - git config core.sparsecheckout true
     - echo "tests/*" > .git/info/sparse-checkout
     - git pull --depth=1 origin main
-    - conda create --prefix /root/rsmenv -c conda-forge -c ets python=${PYVERSION} rsmtool=${RSMVERSION} nose parameterized --yes
+    - mamba create --prefix /root/rsmenv -c conda-forge -c ets python=${PYVERSION} rsmtool=${RSMVERSION} nose2 --yes
 
   script:
-    - "/root/rsmenv/bin/nosetests --nologcapture -w ${TESTDIR} ${TESTFILES}"
+    - "/root/rsmenv/bin/nose2 --quiet -s tests ${TESTFILES}"
 
 # first set of test files
 testset1:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_experiment_rsmtool_1.py"
+    TESTFILES: "test_experiment_rsmtool_1"
   stage: "test"
 
 # second set of test files
 testset2:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_comparer.py test_configuration_parser.py test_experiment_rsmtool_2.py"
+    TESTFILES: "test_comparer test_configuration_parser test_experiment_rsmtool_2"
   stage: "test"
 
 # third set of test files
 testset3:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_analyzer.py test_experiment_rsmeval.py test_fairness_utils.py test_utils_prmse.py test_container.py test_test_utils.py test_cli.py"
+    TESTFILES: "test_analyzer test_experiment_rsmeval test_fairness_utils test_utils_prmse test_container test_test_utils test_cli"
   stage: "test"
 
 # fourth set of test files
 testset4:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_experiment_rsmcompare.py test_experiment_rsmsummarize.py test_modeler.py test_preprocessor.py test_writer.py test_experiment_rsmtool_3.py"
+    TESTFILES: "test_experiment_rsmcompare test_experiment_rsmsummarize test_modeler test_preprocessor test_writer test_experiment_rsmtool_3"
   stage: "test"
 
 # fifth set of test files
 testset5:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_experiment_rsmpredict.py test_reader.py test_reporter.py test_transformer.py test_utils.py test_experiment_rsmtool_4.py"
+    TESTFILES: "test_experiment_rsmpredict test_reader test_reporter test_transformer test_utils test_experiment_rsmtool_4"
   stage: "test"
 
 # sixth set of test files
 testset6:
   extends: ".runtests"
   variables:
-    TESTFILES: "test_experiment_rsmxval.py test_experiment_rsmexplain.py test_explanation_utils.py"
+    TESTFILES: "test_experiment_rsmxval test_experiment_rsmexplain test_explanation_utils test_wandb"
   stage: "test"

@@ -6,7 +6,7 @@
 variables:
   MPLBACKEND: Agg
   PYTHON_VERSION: 3.10
-  RSMVERSION: 10.0.0
+  RSMVERSION: 11.0.1
   TESTDIR: $(Build.SourcesDirectory)\rsmcode\tests
   BINPATH: C:\Miniconda\envs\rsmenv\Scripts
 
@@ -42,7 +42,7 @@ jobs:
     displayName: "Update conda"
 
   - script: |
-      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION% nose parameterized
+      conda create --name rsmenv --yes --quiet -c conda-forge -c ets python=%PYTHON_VERSION% rsmtool=%RSMVERSION% nose2 parameterized
       conda init cmd.exe
     displayName: 'Install RSMTool Package & Dependencies'
 
@@ -52,12 +52,12 @@ jobs:
   - script: |
       echo $(pytestfiles)
       CALL activate rsmenv
-      nosetests --with-xunit -w %TESTDIR% $(pytestfiles)
+      nose2 --quiet -s %TESTDIR% $(pytestfiles)
     displayName: 'Run tests'
 
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
     inputs:
-      testResultsFiles: 'nosetests.xml'
+      testResultsFiles: 'junit.xml'
       testRunTitle: 'RSMTool tests'
     condition: succeededOrFailed()
