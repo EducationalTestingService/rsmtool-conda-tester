@@ -5,7 +5,7 @@ stages:
 
 variables:
   PYVERSION: "3.8"
-  RSMVERSION: "11.2.0"
+  RSMVERSION: "11.3.0"
   BINPATH: "/root/rsmenv/bin"
   TESTDIR: "/root/rsmcode/tests"
 
