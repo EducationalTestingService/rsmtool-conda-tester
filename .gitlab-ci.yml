@@ -20,7 +20,7 @@ variables:
     - git remote add -f origin https://github.com/EducationalTestingService/rsmtool.git
     - git config core.sparsecheckout true
     - echo "tests/*" > .git/info/sparse-checkout
-    - git pull --depth=1 origin main
+    - git pull --depth=1 origin release/12.0.0
     - mamba create --prefix /root/rsmenv -c conda-forge -c ets python=${PYVERSION} rsmtool=${RSMVERSION} nose2 --yes
 
   script:
